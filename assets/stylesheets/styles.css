@@ -1240,6 +1240,23 @@ section {
   margin-bottom: 0;
 }
 
+.recent-posts .tickets-btn {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background-color: #e396df;
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.recent-posts .tickets-btn:hover,
+.recent-posts .tickets-btn:focus {
+  color: #ffffff;
+  opacity: 0.9;
+}
+
 
 /*--------------------------------------------------------------
 # Hero Section
