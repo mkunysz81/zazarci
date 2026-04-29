@@ -123,16 +123,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.addEventListener('load', togglescrollTop);
     document.addEventListener('scroll', togglescrollTop);
-    scrollTop.addEventListener('click', window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    }));
+    scrollTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
   }
 
   /**
    * Clients Slider
    */
-  new Swiper('.clients-slider', {
+  if (document.querySelector('.clients-slider')) {
+    new Swiper('.clients-slider', {
     speed: 400,
     loop: true,
     autoplay: {
@@ -163,12 +166,14 @@ document.addEventListener('DOMContentLoaded', () => {
         spaceBetween: 120
       }
     }
-  });
+    });
+  }
 
   /**
    * Init swiper slider with 1 slide at once in desktop view
    */
-  new Swiper('.slides-1', {
+  if (document.querySelector('.slides-1')) {
+    new Swiper('.slides-1', {
     speed: 600,
     loop: true,
     autoplay: {
@@ -185,12 +190,14 @@ document.addEventListener('DOMContentLoaded', () => {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     }
-  });
+    });
+  }
 
   /**
    * Init swiper slider with 3 slides at once in desktop view
    */
-  new Swiper('.slides-3', {
+  if (document.querySelector('.slides-3')) {
+    new Swiper('.slides-3', {
     speed: 600,
     loop: true,
     autoplay: {
@@ -217,9 +224,8 @@ document.addEventListener('DOMContentLoaded', () => {
         slidesPerView: 2,
       }
     }
-  });
-
-  
+    });
+  }
 
   /**
    * Animation on scroll function and init
