@@ -1196,9 +1196,13 @@ section {
 }
 
 .recent-posts .post-img {
-  max-height: 240px;
   margin: -30px -30px 15px -30px;
   overflow: hidden;
+}
+
+.recent-posts .post-img img {
+  display: block;
+  width: 100%;
 }
 
 .recent-posts .post-category {
