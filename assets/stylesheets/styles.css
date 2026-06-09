@@ -2112,3 +2112,18 @@ section {
 .footer .credits a {
   color: #fff;
 }
+/*--------------------------------------------------------------
+# Newsletter Section
+--------------------------------------------------------------*/
+.newsletter {
+  scroll-margin-top: 70px;
+}
+
+.newsletter .section-header {
+  padding-bottom: 30px;
+}
+
+.newsletter-form {
+  max-width: 760px;
+  margin: 0 auto;
+}
