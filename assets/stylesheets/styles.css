@@ -2121,7 +2121,14 @@ section {
 }
 
 .newsletter .section-header {
+  max-width: 900px;
+  margin: 0 auto;
   padding-bottom: 30px;
+  color: #000000;
+}
+
+.newsletter .section-header p {
+  color: #000000;
 }
 
 .newsletter-form {
