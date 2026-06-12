@@ -134,33 +134,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const style = window.getComputedStyle(element);
-        if (style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0) {
+        if (style.position !== 'fixed' || style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0) {
           return;
         }
 
         const rect = element.getBoundingClientRect();
-        const elementDescription = [
-          element.id,
-          element.className,
-          element.getAttribute('aria-label'),
-          element.getAttribute('name'),
-          element.getAttribute('src'),
-          element.getAttribute('title')
-        ].filter(value => typeof value === 'string').join(' ').toLowerCase();
-        const hasConsentMarker = /(cookie|consent|privacy|cmp|rodo|gdpr|ciastecz)/.test(elementDescription);
-        const isOverlayElement = style.position === 'fixed'
-          || style.position === 'sticky'
-          || element.tagName === 'IFRAME'
-          || element.getAttribute('role') === 'dialog';
-        const overlapsBottomRight = rect.height >= 40
+        const isBottomBanner = rect.height >= 40
           && rect.height <= viewportHeight * 0.75
-          && rect.width >= 160
-          && rect.right >= viewportWidth - 220
+          && rect.width >= viewportWidth * 0.6
           && rect.top > 0
           && rect.top < viewportHeight
-          && rect.bottom >= viewportHeight - 32;
+          && rect.bottom >= viewportHeight - 2;
 
-        if (overlapsBottomRight && (isOverlayElement || hasConsentMarker)) {
+        if (isBottomBanner) {
           cookieBannerHeight = Math.max(cookieBannerHeight, viewportHeight - rect.top);
         }
       });
