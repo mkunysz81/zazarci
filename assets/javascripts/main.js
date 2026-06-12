@@ -114,6 +114,70 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /**
+   * Keep floating controls above a visible cookie banner.
+   * The banner is injected by the consent service, so its height is detected
+   * at runtime and exposed to CSS through a custom property.
+   */
+  const floatingControls = document.querySelectorAll('.patronite-button, .scroll-top');
+  if (floatingControls.length) {
+    let cookieBannerFrame;
+
+    const updateCookieBannerHeight = () => {
+      cookieBannerFrame = null;
+      const viewportHeight = window.innerHeight;
+      const viewportWidth = window.innerWidth;
+      let cookieBannerHeight = 0;
+
+      document.body.querySelectorAll('*').forEach(element => {
+        if ([...floatingControls].some(control => control === element || control.contains(element) || element.contains(control))) {
+          return;
+        }
+
+        const style = window.getComputedStyle(element);
+        if (style.position !== 'fixed' || style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0) {
+          return;
+        }
+
+        const rect = element.getBoundingClientRect();
+        const isBottomBanner = rect.height >= 40
+          && rect.height <= viewportHeight * 0.75
+          && rect.width >= viewportWidth * 0.6
+          && rect.top > 0
+          && rect.top < viewportHeight
+          && rect.bottom >= viewportHeight - 2;
+
+        if (isBottomBanner) {
+          cookieBannerHeight = Math.max(cookieBannerHeight, viewportHeight - rect.top);
+        }
+      });
+
+      document.documentElement.style.setProperty('--cookie-banner-height', `${Math.ceil(cookieBannerHeight)}px`);
+    };
+
+    const scheduleCookieBannerUpdate = () => {
+      if (!cookieBannerFrame) {
+        cookieBannerFrame = window.requestAnimationFrame(updateCookieBannerHeight);
+      }
+    };
+
+    const cookieBannerObserver = new MutationObserver(scheduleCookieBannerUpdate);
+    cookieBannerObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['class', 'hidden', 'style']
+    });
+
+    window.addEventListener('load', scheduleCookieBannerUpdate);
+    window.addEventListener('resize', scheduleCookieBannerUpdate);
+    document.addEventListener('click', () => {
+      scheduleCookieBannerUpdate();
+      window.setTimeout(scheduleCookieBannerUpdate, 350);
+    });
+    scheduleCookieBannerUpdate();
+  }
+
+  /**
    * Scroll top button
    */
   const scrollTop = document.querySelector('.scroll-top');
