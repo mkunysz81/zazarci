@@ -138,10 +138,10 @@ section {
 .patronite-button {
   position: fixed;
   right: 15px;
-  bottom: 15px;
+  bottom: calc(15px + var(--cookie-banner-height, 0px));
   z-index: 99998;
   display: block;
-  transition: transform 0.3s ease;
+  transition: bottom 0.3s ease, transform 0.3s ease;
 }
 
 .patronite-button:hover {
@@ -191,7 +191,7 @@ section {
 .scroll-top.active {
   visibility: visible;
   opacity: 1;
-  bottom: 75px;
+  bottom: calc(75px + var(--cookie-banner-height, 0px));
 }
 
 @media (max-width: 575px) {
