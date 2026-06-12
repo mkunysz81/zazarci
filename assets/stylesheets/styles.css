@@ -133,6 +133,34 @@ section {
 }
 
 /*--------------------------------------------------------------
+# Patronite button
+--------------------------------------------------------------*/
+.patronite-button {
+  position: fixed;
+  right: 15px;
+  bottom: calc(15px + var(--cookie-banner-height, 0px));
+  z-index: 99998;
+  display: block;
+  transition: bottom 0.3s ease, transform 0.3s ease;
+}
+
+.patronite-button:hover {
+  transform: translateY(-3px);
+}
+
+.patronite-button:focus-visible {
+  outline: 3px solid var(--color-secondary);
+  outline-offset: 3px;
+}
+
+.patronite-button img {
+  display: block;
+  width: 180px;
+  max-width: calc(100vw - 30px);
+  height: auto;
+}
+
+/*--------------------------------------------------------------
 # Scroll top button
 --------------------------------------------------------------*/
 .scroll-top {
@@ -163,7 +191,13 @@ section {
 .scroll-top.active {
   visibility: visible;
   opacity: 1;
-  bottom: 15px;
+  bottom: calc(75px + var(--cookie-banner-height, 0px));
+}
+
+@media (max-width: 575px) {
+  .patronite-button img {
+    width: 160px;
+  }
 }
 
 /*--------------------------------------------------------------
