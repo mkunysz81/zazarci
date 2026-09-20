@@ -1221,12 +1221,24 @@ section {
 # Recent Blog Posts Section
 --------------------------------------------------------------*/
 .recent-posts article {
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 1px 6px rgb(0 0 0 / 10%);
   background-color: #fff;
   padding: 30px;
   height: 100%;
   border-radius: 10px;
   overflow: hidden;
+}
+
+.recent-posts article>.d-flex,
+.recent-posts .post-meta {
+  flex: 1;
+}
+
+.recent-posts .post-meta {
+  display: flex;
+  flex-direction: column;
 }
 
 .recent-posts .post-img {
@@ -1275,6 +1287,7 @@ section {
 .recent-posts .post-date {
   font-size: 14px;
   color: #3c3c3c;
+  margin-top: auto;
   margin-bottom: 0;
 }
 
